@@ -8,9 +8,9 @@ from Menu import Menu
 
 pygame.init()
 
-gameDisplay_width=800
-gameDisplay_height=600
-gameDisplay = pygame.display.set_mode((gameDisplay_width,gameDisplay_height))
+gameDisplay_width = 800
+gameDisplay_height = 600
+gameDisplay = pygame.display.set_mode((gameDisplay_width, gameDisplay_height))
 pygame.display.set_caption('Gamemaker')
 
 crashed = False
@@ -18,9 +18,9 @@ crashed = False
 clock = pygame.time.Clock()
 Chapter = Chapter(gameDisplay)
 Chapter.start()
-endEvent=pygame.event.Event(pygame.USEREVENT,{"EventName":"EndEvent"})
+endEvent = pygame.event.Event(pygame.USEREVENT, {"EventName": "EndEvent"})
 menu = Menu(gameDisplay.get_rect())
-end=False
+end = False
 
 while not crashed:
 
@@ -28,6 +28,8 @@ while not crashed:
 
         if event.type == pygame.QUIT:
             crashed = True
+        if event.type == pygame.MOUSEMOTION:
+                Chapter.Plane.rotate()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 Chapter.pgenerateTargetTimer.pause(True)
@@ -43,7 +45,7 @@ while not crashed:
             if event.key == pygame.K_RIGHT:
                 Chapter.Plane.mx = 1
             if event.key == pygame.K_SPACE:
-                Chapter.Plane.fire(gameDisplay)
+                Chapter.Plane.fire()
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 Chapter.Plane.my = 0
@@ -70,25 +72,3 @@ while not crashed:
 
 pygame.quit()
 quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
