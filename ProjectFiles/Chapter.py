@@ -62,7 +62,6 @@ class Chapter:
                             target.hit()
                             # mermi kaybolmalı
                             self.Plane.bullets.remove(bullet)
-
     def draw(self, screen):
         self.drawBackGround(screen)
         self.drawPlane(screen)

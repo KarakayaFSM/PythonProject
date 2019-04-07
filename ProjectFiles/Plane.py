@@ -1,6 +1,6 @@
 import pygame
 import math
-from Bullet import Bullet
+from myBullet import myBullet
 
 
 class Plane:
@@ -33,7 +33,7 @@ class Plane:
         screen.blit(self.flyImage, self.rectangle)
 
         for bullet in self.bullets:
-            bullet.draw(screen)
+            bullet.draw_aimed(screen)
             # rectangle sınıfının contains fonsiyonu dörtgenin diğerinin içinde olup olmadığı bilgisini döndürür.
             # biz burada mermiler ekrandan çıkmışmı kontrolü yapacağız
             # ekrandan çıkan mermiler mermi listesinden silinmeli, aksi taktirde binlerce mermi sonsuzluğa kadar gider bu da boşa kaynak sarfıdır.
@@ -42,7 +42,7 @@ class Plane:
                 # ancak burada python kabul etti :D
 
     def fire(self):
-        nbullet = Bullet(self)
+        nbullet = myBullet(self)
         nbullet.mx = 1
         self.bullets.append(nbullet)
 
@@ -55,4 +55,4 @@ class Plane:
         angle = (180 / math.pi) * -math.atan2(rel_y, rel_x)
         center = self.flyImage.get_rect().center
         self.flyImage = pygame.transform.rotate(self.originalImage, int(angle))
-        # self.rectangle = self.flyImage.get_rect(center = center)
+        self.rectangle.move(center[0],center[1])
