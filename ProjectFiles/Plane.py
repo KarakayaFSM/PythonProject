@@ -37,7 +37,7 @@ class Plane:
             # rectangle sınıfının contains fonsiyonu dörtgenin diğerinin içinde olup olmadığı bilgisini döndürür.
             # biz burada mermiler ekrandan çıkmışmı kontrolü yapacağız
             # ekrandan çıkan mermiler mermi listesinden silinmeli, aksi taktirde binlerce mermi sonsuzluğa kadar gider bu da boşa kaynak sarfıdır.
-            if not screen.get_rect().contains(bullet.rectangle):
+            if not screen.get_rect().contains(bullet.rectangle) or bullet.rectangle[1] is 0:
                 self.bullets.remove(bullet)  # foreach döngülerinde bunu yapmak iyi bir yöntem değildir, çünkü dizin bozulur. Bir çok programlama dilinde hata alırsınız.
                 # ancak burada python kabul etti :D
 
