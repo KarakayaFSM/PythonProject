@@ -1,7 +1,7 @@
 import pygame
 import math
 from myBullet import myBullet
-
+from mermi import Bullet
 
 class Plane:
     def __init__(self, screen):
@@ -33,7 +33,7 @@ class Plane:
         screen.blit(self.flyImage, self.rectangle)
 
         for bullet in self.bullets:
-            bullet.draw_aimed(screen)
+            bullet.rotate(screen)
             # rectangle sınıfının contains fonsiyonu dörtgenin diğerinin içinde olup olmadığı bilgisini döndürür.
             # biz burada mermiler ekrandan çıkmışmı kontrolü yapacağız
             # ekrandan çıkan mermiler mermi listesinden silinmeli, aksi taktirde binlerce mermi sonsuzluğa kadar gider bu da boşa kaynak sarfıdır.
@@ -42,10 +42,9 @@ class Plane:
                 # ancak burada python kabul etti :D
 
     def fire(self):
-        nbullet = myBullet(self)
+        nbullet = myBullet(self,pygame.mouse.get_pos())
         nbullet.mx = 1
         self.bullets.append(nbullet)
-
     def explode(self):
         self.exploded = True
 

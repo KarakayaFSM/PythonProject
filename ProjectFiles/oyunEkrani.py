@@ -29,22 +29,22 @@ while not crashed:
                 crashed = menu.runMenu(gameDisplay)
                 Chapter.pgenerateTargetTimer.pause(False)
 
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_w:
                 Chapter.Plane.my = -1
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_s:
                 Chapter.Plane.my = 1
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 Chapter.Plane.mx = -1
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_d:
                 Chapter.Plane.mx = 1
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_w:
                 Chapter.Plane.my = 0
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_s:
                 Chapter.Plane.my = 0
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_a:
                 Chapter.Plane.mx = 0
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_d:
                 Chapter.Plane.mx = 0
         # event karşılaştırmalarında eşitlik koşulu çalışır
         # eventlar aynı olmalı özellikleriyle birlikte
