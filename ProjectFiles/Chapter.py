@@ -3,6 +3,7 @@ from TargetOne import TargetOne
 from Plane import Plane
 from pTimer import pTimer
 
+
 class Chapter:
     def __init__(self, screen):
         self.name = "Haydi Başla"
@@ -15,7 +16,7 @@ class Chapter:
         self.screen = screen
 
         self.pgenerateTargetTimer = pTimer(2, self.generateTarget, screen)
-        self.finishEvent = pygame.event.Event(pygame.USEREVENT,{"EventName":"FinishEvent"})
+        self.finishEvent = pygame.event.Event(pygame.USEREVENT, {"EventName": "FinishEvent"})
 
     def start(self):
         self.pgenerateTargetTimer.start()
@@ -25,7 +26,7 @@ class Chapter:
         pygame.event.post(self.finishEvent)
 
     def generateTarget(self, arguments):
-        newTarget = TargetOne(arguments[0]) # restart error 2nd layer
+        newTarget = TargetOne(arguments[0])  # restart error 2nd layer
         self.targets.append(newTarget)
 
     def drawBackGround(self, screen):
@@ -44,10 +45,10 @@ class Chapter:
             exploded = target.draw(screen)
             if exploded:
                 self.targets.remove(target)
+                pygame.event.post(TargetOne.ExplodedEvent)
                 if self.Plane.exploded:
                     pygame.event.post(self.Plane.explodedEvent)
                     self.finish()
-
             else:
                 if target.rectangle.colliderect(self.Plane.rectangle):
                     if not target.exploded:
@@ -62,6 +63,7 @@ class Chapter:
                             target.hit()
                             # mermi kaybolmalı
                             self.Plane.bullets.remove(bullet)
+
     def draw(self, screen):
         self.drawBackGround(screen)
         self.drawPlane(screen)

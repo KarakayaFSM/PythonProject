@@ -1,7 +1,6 @@
 import pygame
 import math
 from myBullet import myBullet
-from mermi import Bullet
 
 class Plane:
     def __init__(self, screen):

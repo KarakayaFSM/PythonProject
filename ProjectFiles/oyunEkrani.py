@@ -1,6 +1,10 @@
 import pygame
 from Chapter import Chapter
 from Menu import Menu
+from ScoreBoard import ScoreBoard
+from TargetOne import TargetOne
+from threading import Thread
+from pTimer import pTimer
 
 pygame.init()
 
@@ -16,6 +20,11 @@ Chapter.start()
 endEvent = pygame.event.Event(pygame.USEREVENT, {"EventName": "EndEvent"})
 menu = Menu(gameDisplay.get_rect())
 end = False
+ScoreBoard.init_ScoreBoard()
+ScoreBoard.set_Score()
+TimerThread = Thread(target=ScoreBoard.timer_func, args=(gameDisplay,))
+TimerThread.setDaemon(True)
+TimerThread.start()
 
 while not crashed:
 
@@ -23,6 +32,13 @@ while not crashed:
 
         if event.type == pygame.QUIT:
             crashed = True
+            TimerThread.join(0.1)
+        elif event == ScoreBoard.EndOfTimeEvent or end:
+            TimerThread.join(0.5)
+            Chapter.pgenerateTargetTimer.pause(True)
+            crashed = menu.runMenu(gameDisplay)
+            Chapter.pgenerateTargetTimer.pause(False)
+
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 Chapter.pgenerateTargetTimer.pause(True)
@@ -56,12 +72,14 @@ while not crashed:
         elif event == Chapter.finishEvent:
             print(event)
             end = True
-
+        elif event == TargetOne.ExplodedEvent:
+            ScoreBoard.set_Score(10)
         elif event == Chapter.Plane.explodedEvent:
             print(event)
 
     if not end:
         Chapter.draw(gameDisplay)
+        ScoreBoard.draw(gameDisplay)
 
     pygame.display.update()
     clock.tick(60)
