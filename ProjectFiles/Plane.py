@@ -3,6 +3,7 @@ import math
 from myBullet import myBullet
 
 class Plane:
+    ammo = 10000
     def __init__(self, screen):
         self.x = 150
         self.y = 150
@@ -19,6 +20,7 @@ class Plane:
         self.bullets = []
         self.exploded = False
         self.explodedEvent = pygame.event.Event(pygame.USEREVENT,{"EventName":"ExplodedEvent"})
+
 
     def draw(self, screen):
 
@@ -41,9 +43,12 @@ class Plane:
                 # ancak burada python kabul etti :D
 
     def fire(self):
-        nbullet = myBullet(self,pygame.mouse.get_pos())
-        nbullet.mx = 1
-        self.bullets.append(nbullet)
+        print("ammo:",self.ammo)
+        if self.ammo > 0:
+            nbullet = myBullet(self,pygame.mouse.get_pos())
+            nbullet.mx = 1
+            self.bullets.append(nbullet)
+            self.ammo-=1
     def explode(self):
         self.exploded = True
 

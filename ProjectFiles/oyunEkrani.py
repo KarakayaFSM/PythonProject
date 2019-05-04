@@ -34,7 +34,7 @@ while not crashed:
             crashed = True
             TimerThread.join(0.1)
         elif event == ScoreBoard.EndOfTimeEvent or end:
-            TimerThread.join(0.5)
+            TimerThread.join(0.1)
             Chapter.pgenerateTargetTimer.pause(True)
             crashed = menu.runMenu(gameDisplay)
             Chapter.pgenerateTargetTimer.pause(False)
@@ -44,6 +44,8 @@ while not crashed:
                 Chapter.pgenerateTargetTimer.pause(True)
                 crashed = menu.runMenu(gameDisplay)
                 Chapter.pgenerateTargetTimer.pause(False)
+                if event == Menu.Restart_Event:
+                    ScoreBoard.set_Score(0)
 
             if event.key == pygame.K_w:
                 Chapter.Plane.my = -1
@@ -72,15 +74,15 @@ while not crashed:
         elif event == Chapter.finishEvent:
             print(event)
             end = True
-        elif event == TargetOne.ExplodedEvent:
-            ScoreBoard.set_Score(10)
+        #elif event == TargetOne.ExplodedEvent:
+        #    ScoreBoard.set_Score(10)
         elif event == Chapter.Plane.explodedEvent:
             print(event)
 
     if not end:
         Chapter.draw(gameDisplay)
-        ScoreBoard.draw(gameDisplay)
 
+    ScoreBoard.draw(gameDisplay)
     pygame.display.update()
     clock.tick(60)
 

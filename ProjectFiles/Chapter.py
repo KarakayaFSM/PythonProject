@@ -1,7 +1,10 @@
 import pygame
 from TargetOne import TargetOne
+from TargetTwo import TargetTwo
+from TargetThree import TargetThree
 from Plane import Plane
 from pTimer import pTimer
+import random
 
 
 class Chapter:
@@ -17,6 +20,7 @@ class Chapter:
 
         self.pgenerateTargetTimer = pTimer(2, self.generateTarget, screen)
         self.finishEvent = pygame.event.Event(pygame.USEREVENT, {"EventName": "FinishEvent"})
+        self.Targets = (TargetOne,TargetTwo,TargetThree)
 
     def start(self):
         self.pgenerateTargetTimer.start()
@@ -26,7 +30,7 @@ class Chapter:
         pygame.event.post(self.finishEvent)
 
     def generateTarget(self, arguments):
-        newTarget = TargetOne(arguments[0])  # restart error 2nd layer
+        newTarget = self.Targets[random.randint(0,2)](arguments[0])  # restart error 2nd layer
         self.targets.append(newTarget)
 
     def drawBackGround(self, screen):
@@ -42,7 +46,7 @@ class Chapter:
 
     def drawTargets(self, screen):
         for target in self.targets:
-            exploded = target.draw(screen)
+            exploded = target.draw(screen) # TARGET DRAW BOOLEAN BİR DEĞER DÖNDÜRMELİ
             if exploded:
                 self.targets.remove(target)
                 pygame.event.post(TargetOne.ExplodedEvent)

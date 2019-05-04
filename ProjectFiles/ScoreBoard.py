@@ -4,7 +4,7 @@ import time as timer
 
 class ScoreBoard:
     score = 0
-    time = 5
+    time = 10
     textColor = (255, 255, 255)
     rectangle = pygame.rect.Rect(0, 50, 200, 50)
     text_container_rectangle = pygame.rect.Rect(650, 20, 100, 50)
@@ -13,6 +13,12 @@ class ScoreBoard:
     score_fontedText = None
     score_textRectangle = None
     fontedText = None
+
+    @staticmethod
+    def reset():
+        ScoreBoard.score = 0
+        ScoreBoard.time = 60
+
     @staticmethod
     def prepare_text(text,text_size=100):
         pygame.font.init()

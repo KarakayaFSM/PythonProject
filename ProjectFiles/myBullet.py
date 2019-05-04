@@ -1,15 +1,11 @@
 import pygame
 import math
 
-from pygame import Vector2
-
 
 class myBullet:
     def __init__(self, plane, mouse_pos):
         self.x = plane.rectangle[0]
         self.y = plane.rectangle[1]
-
-        self.pos = Vector2(x=self.x, y=self.y)
         self.mouse_pos = mouse_pos
         self.rel_x, self.rel_y = mouse_pos[0] - self.x, mouse_pos[1] - self.y
         self.angle = (180 / math.pi) * -math.atan2(self.rel_y, self.rel_x)

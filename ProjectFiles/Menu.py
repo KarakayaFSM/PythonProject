@@ -98,6 +98,8 @@ class Menu_TextItem:
 
 
 class Menu:
+    Restart_Event = pygame.event.Event(pygame.USEREVENT, {"EventName": "restartEvent"})
+
     def __init__(self, screenrect=pygame.rect.Rect(0, 0, 0, 0)):
         self.isActive = False
         self.objectList = []
@@ -148,7 +150,8 @@ class Menu:
                 elif event == self.btnExit.mouseDownEvent:
                     return True
                 elif event == self.btnRestart.mouseDownEvent:
-                    return True
+                    pygame.event.post(Menu.Restart_Event)
+                    return False
                 screen.blit(screenshoot, (0, 0))
                 self.draw(screen)
                 pygame.display.update()
