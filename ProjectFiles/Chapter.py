@@ -49,7 +49,7 @@ class Chapter:
             exploded = target.draw(screen) # TARGET DRAW BOOLEAN BİR DEĞER DÖNDÜRMELİ
             if exploded:
                 self.targets.remove(target)
-                pygame.event.post(TargetOne.ExplodedEvent)
+                # pygame.event.post(TargetOne.ExplodedEvent)
                 if self.Plane.exploded:
                     pygame.event.post(self.Plane.explodedEvent)
                     self.finish()

@@ -3,7 +3,7 @@ import math
 from myBullet import myBullet
 
 class Plane:
-    ammo = 10000
+    ammo = 100
     def __init__(self, screen):
         self.x = 150
         self.y = 150
@@ -11,7 +11,7 @@ class Plane:
         self.my = 0  # y haraket yönü
         width = screen.get_width()
         height = screen.get_height()
-        self.rectangle = pygame.rect.Rect(10, int(height / 2) - int(height / 5 / 2), int(width / 5), int(height / 5))
+        self.rectangle = pygame.rect.Rect(320, int(height / 2) - int(height / 5 / 2), int(width / 5), int(height / 5))
         self.originalImage = self.flyImage = pygame.transform.scale(pygame.image.load("images/png/Plane/spaceship1.png"),
                                                (self.rectangle[2]-30, self.rectangle[3]-30))
 
@@ -43,12 +43,12 @@ class Plane:
                 # ancak burada python kabul etti :D
 
     def fire(self):
-        print("ammo:",self.ammo)
-        if self.ammo > 0:
-            nbullet = myBullet(self,pygame.mouse.get_pos())
+        print("ammo:",Plane.ammo)
+        if Plane.ammo > 0:
+            nbullet = myBullet(self)
             nbullet.mx = 1
             self.bullets.append(nbullet)
-            self.ammo-=1
+            Plane.ammo-=1
     def explode(self):
         self.exploded = True
 
