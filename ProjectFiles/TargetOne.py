@@ -28,14 +28,14 @@ class TargetOne:
         
     def draw(self,screen):
         if self.explosionImageOrder==-1:
-            self.rectangle[0]=self.rectangle[0]-self.mx*2
+            self.rectangle[0]=self.rectangle[0]-self.mx*5
             #self.rectangle[1]=self.rectangle[1]-self.my*2
             #self.rectangle.centerx= self.rectangle.centerx-self.mx*2
             screen.blit(self.flyImage, [self.rectangle[0]-int(self.flyImage.get_width()/2),self.rectangle[1]-int(self.flyImage.get_height()/2)])
         else:
             self.explosionImageOrder=(self.explosionImageOrder+1)%9
-            self.rectangle[0]=self.rectangle[0]-self.mx*2
-            self.rectangle[1]=self.rectangle[1]-self.my*2
+            self.rectangle[0]=self.rectangle[0]-self.mx*5
+            self.rectangle[1]=self.rectangle[1]-self.my*5
             self.rectangle.centerx= self.rectangle.centerx-self.mx*2
             if self.explosionImageOrder==8:
                 return True

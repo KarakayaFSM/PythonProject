@@ -70,7 +70,7 @@ class TargetThree:
         self.rectangle = pygame.rect.Rect(width + int(width / 20) / 2, self.y + int(height / 10) / 2, int(width / 20),
                                           int(height / 10))
 
-        self.flyImage = (pygame.transform.scale(pygame.image.load("images/png/Bombs/Bomb_2_Idle_000.png"),
+        self.flyImage = (pygame.transform.scale(pygame.image.load("images/png/Bombs/Bomb_3_Idle_000.png"),
                                                 (self.rectangle[2], self.rectangle[3])))
 
         self.explosionImageOrder = -1
@@ -83,7 +83,7 @@ class TargetThree:
 
     def draw(self, screen):
         if self.explosionImageOrder == -1:
-            self.rectangle[0] = self.rectangle[0] - self.mx * 2
+            self.rectangle[0] = self.rectangle[0] - self.mx * 3
             # self.rectangle[1]=self.rectangle[1]-self.my*2
             # self.rectangle.centerx= self.rectangle.centerx-self.mx*2
             screen.blit(self.flyImage, [self.rectangle[0] - int(self.flyImage.get_width() / 2),

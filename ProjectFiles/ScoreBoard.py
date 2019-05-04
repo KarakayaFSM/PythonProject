@@ -4,7 +4,7 @@ import time as timer
 
 class ScoreBoard:
     score = 0
-    time = 10
+    time = 60
     textColor = (255, 255, 255)
     rectangle = pygame.rect.Rect(0, 50, 200, 50)
     time_text_rectangle = pygame.rect.Rect(650, 20, 100, 50)
@@ -67,6 +67,6 @@ class ScoreBoard:
             # screen.blit(ScoreBoard.fontedText, ScoreBoard.text_container_rectangle)
             ScoreBoard.time -= 1
             timer.sleep(1)
-        # if ScoreBoard.time is 0:
-        #     pygame.event.post(ScoreBoard.EndOfTimeEvent)
-        #     screen.blit(ScoreBoard.prepare_text("Sure Doldu Basaramadin",50), ScoreBoard.getTextRectangle(100, 100))
+        if ScoreBoard.time is 0:
+            pygame.event.post(ScoreBoard.EndOfTimeEvent)
+            screen.blit(ScoreBoard.prepare_text("Sure Doldu Basaramadin",50), ScoreBoard.getTextRectangle(100, 100))
