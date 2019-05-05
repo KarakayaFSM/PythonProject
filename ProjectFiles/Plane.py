@@ -43,7 +43,6 @@ class Plane:
                 # ancak burada python kabul etti :D
 
     def fire(self):
-        print("ammo:",Plane.ammo)
         if Plane.ammo > 0:
             nbullet = myBullet(self)
             nbullet.mx = 1
