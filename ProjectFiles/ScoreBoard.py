@@ -1,5 +1,6 @@
 import pygame
 import time as timer
+from Plane import Plane
 
 
 class ScoreBoard:
@@ -18,6 +19,8 @@ class ScoreBoard:
     def reset():
         ScoreBoard.score = 0
         ScoreBoard.time = 60
+        Plane.ammo = 20
+
 
     @staticmethod
     def prepare_text(text,text_size=100):

@@ -1,15 +1,12 @@
 import pygame
-from Chapter import Chapter
 from Menu import Menu
 from ScoreBoard import ScoreBoard
-from TargetOne import TargetOne
 from threading import Thread
-from pTimer import pTimer
+from gameOverMenu import gameOverMenu
+from Chapter import Chapter
 
 pygame.init()
-
-gameDisplay_width = 800
-gameDisplay_height = 600
+gameDisplay_width, gameDisplay_height = 800, 600
 gameDisplay = pygame.display.set_mode((gameDisplay_width, gameDisplay_height))
 pygame.display.set_caption('Gamemaker')
 crashed = False
@@ -19,6 +16,7 @@ Chapter = Chapter(gameDisplay)
 Chapter.start()
 endEvent = pygame.event.Event(pygame.USEREVENT, {"EventName": "EndEvent"})
 menu = Menu(gameDisplay.get_rect())
+gameOverMenu = gameOverMenu(gameDisplay.get_rect())
 end = False
 ScoreBoard.init_ScoreBoard()
 ScoreBoard.set_Score()
@@ -36,16 +34,16 @@ while not crashed:
         elif event == ScoreBoard.EndOfTimeEvent or end:
             TimerThread.join(0.1)
             Chapter.pgenerateTargetTimer.pause(True)
-            crashed = menu.runMenu(gameDisplay)
+            crashed = gameOverMenu.runGameOverMenu(gameDisplay)
             Chapter.pgenerateTargetTimer.pause(False)
 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 Chapter.pgenerateTargetTimer.pause(True)
                 crashed = menu.runMenu(gameDisplay)
-                Chapter.pgenerateTargetTimer.pause(False)
                 if event == Menu.Restart_Event:
-                    ScoreBoard.set_Score(0)
+                    ScoreBoard.reset()
+                Chapter.pgenerateTargetTimer.pause(False)
 
             if event.key == pygame.K_w:
                 Chapter.Plane.my = -1
@@ -74,7 +72,7 @@ while not crashed:
         elif event == Chapter.finishEvent:
             print(event)
             end = True
-        #elif event == TargetOne.ExplodedEvent:
+        # elif event == TargetOne.ExplodedEvent:
         #    ScoreBoard.set_Score(10)
         elif event == Chapter.Plane.explodedEvent:
             print(event)

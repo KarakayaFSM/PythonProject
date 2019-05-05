@@ -3,7 +3,7 @@ import math
 from myBullet import myBullet
 
 class Plane:
-    ammo = 100
+    ammo = 20
     def __init__(self, screen):
         self.x = 150
         self.y = 150
